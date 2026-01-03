@@ -59,4 +59,32 @@ class UserController extends Controller
         Alert::success('Success', 'Add user patient has success.');
         return redirect()->route('users.patient');
     }
+
+    public function patientEdit(User $user)
+    {
+        return view('cms.user.patient.partial.edit', compact('user'));
+    }
+
+    public function patientUpdate(Request $request, User $user)
+    {
+        $validation = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+        if ($validation->fails()) {
+            Alert::error('Fail', 'Update user patient has failed. Check your input data.');
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+        ]);
+
+        Alert::success('Success', 'Update user patient has success.');
+        return redirect()->route('users.patient');
+    }
 }

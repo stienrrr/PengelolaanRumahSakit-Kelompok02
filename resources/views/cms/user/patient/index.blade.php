@@ -38,7 +38,7 @@
                                             <td>
                                                 <div class="row row-cols-auto g-2 align-items-center justify-content-center">
                                                     <div class="col">
-                                                        <a href="#" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
+                                                        <a href="{{ route('users.patient.edit', $data->id) }}" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
                                                     </div>
                                                     <div class="col">
                                                         <a href="#" class="btn btn-sm btn-danger raised d-flex gap-2"><i class="material-icons-outlined">delete</i></a>
