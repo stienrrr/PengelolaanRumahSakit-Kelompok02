@@ -87,4 +87,11 @@ class UserController extends Controller
         Alert::success('Success', 'Update user patient has success.');
         return redirect()->route('users.patient');
     }
+
+    public function patientDestroy(User $user)
+    {
+        $user->delete();
+        Alert::success('Success', 'Delete user patient has success.');
+        return redirect()->route('users.patient');
+    }
 }

@@ -41,7 +41,9 @@
                                                         <a href="{{ route('users.patient.edit', $data->id) }}" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
                                                     </div>
                                                     <div class="col">
-                                                        <a href="#" class="btn btn-sm btn-danger raised d-flex gap-2"><i class="material-icons-outlined">delete</i></a>
+                                                        <button type="button" class="btn btn-sm btn-danger raised d-flex gap-2" data-bs-toggle="modal"
+                                                    data-bs-target="#deleteModal-{{ $data->id }}"><i class="material-icons-outlined">delete</i></button>
+                                                    @include('cms.user.patient.partial.delete')
                                                     </div>
                                                 </div>
                                             </td>
