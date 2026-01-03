@@ -24,4 +24,9 @@ class UserController extends Controller
 
         return view('cms.user.patient.index', compact('datas'));
     }
+
+    public function patientCreate()
+    {
+        return view('cms.user.patient.partial.create');
+    }
 }

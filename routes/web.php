@@ -17,6 +17,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/admin', [UserController::class, 'adminIndex'])->name('users.admin');
 
         Route::get('/patient', [UserController::class, 'patientIndex'])->name('users.patient');
+        Route::get('/patient/create', [UserController::class, 'patientCreate'])->name('users.patient.create');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

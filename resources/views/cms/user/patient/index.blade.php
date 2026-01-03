@@ -4,13 +4,10 @@
     <div class="main-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Users Patient</li>
-                </ol>
-            </nav>
+            <div class="h4">Users Admin</div>
+            <div class="ms-auto">
+                <a href="{{ route('users.patient.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-2"></i> Add Patient</a>
+            </div>
         </div>
         <!--end breadcrumb-->
 
@@ -58,7 +55,7 @@
     <script src="{{ asset('dashboard/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#dataTable').DataTable({
                 responsive: true,
                 order: [
@@ -70,15 +67,15 @@
                     searchable: false,
                     className: "text-center"
                 }],
-                drawCallback: function(settings) {
+                drawCallback: function (settings) {
                     const api = this.api();
                     const start = api.page.info().start;
                     api.column(0, {
-                            search: 'applied',
-                            order: 'applied'
-                        })
+                        search: 'applied',
+                        order: 'applied'
+                    })
                         .nodes()
-                        .each(function(cell, i) {
+                        .each(function (cell, i) {
                             cell.innerHTML = start + i + 1;
                         });
                 }
