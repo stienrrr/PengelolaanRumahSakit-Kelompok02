@@ -15,6 +15,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('users')->group(function () {
         Route::get('/admin', [UserController::class, 'adminIndex'])->name('users.admin');
+        Route::get('/admin/create', [UserController::class, 'adminCreate'])->name('users.admin.create');
+        Route::post('/admin/store', [UserController::class, 'adminStore'])->name('users.admin.store');
+        Route::get('/admin/{user}/edit', [UserController::class, 'adminEdit'])->name('users.admin.edit');
+        Route::put('/admin/{user}/update', [UserController::class, 'adminUpdate'])->name('users.admin.update');
+        Route::delete('/admin/{user}/destroy', [UserController::class, 'adminDestroy'])->name('users.admin.destroy');
 
         Route::get('/patient', [UserController::class, 'patientIndex'])->name('users.patient');
         Route::get('/patient/create', [UserController::class, 'patientCreate'])->name('users.patient.create');

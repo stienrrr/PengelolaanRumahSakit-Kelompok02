@@ -6,7 +6,7 @@
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="h4">Users Admin</div>
             <div class="ms-auto">
-                <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-2"></i> Add Admin</a>
+                <a href="{{ route('users.admin.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-2"></i> Add Admin</a>
             </div>
         </div>
         <!--end breadcrumb-->
@@ -38,7 +38,16 @@
                                             <td class="text-center">{{ $data->email }}</td>
                                             <td class="text-center">{{ $data->roles[0]->name }}</td>
                                             <td>
-                                                Detail | Edit | Delete
+                                                <div class="row row-cols-auto g-2 align-items-center justify-content-center">
+                                                    <div class="col">
+                                                        <a href="{{ route('users.admin.edit', $data->id) }}" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="button" class="btn btn-sm btn-danger raised d-flex gap-2" data-bs-toggle="modal"
+                                                    data-bs-target="#deleteModal-{{ $data->id }}"><i class="material-icons-outlined">delete</i></button>
+                                                    @include('cms.user.admin.partial.delete')
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
