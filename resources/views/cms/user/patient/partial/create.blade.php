@@ -11,7 +11,8 @@
         <div class="col-8 col-xl-8 mx-auto">
             <div class="card">
 							<div class="card-body p-4">
-								<form class="row g-3">
+								<form class="row g-3" action="{{ route('users.patient.store') }}" method="POST">
+									@csrf
 									<div class="col-md-6">
 										<label for="name" class="form-label">Full Name</label>
 										<input type="text" class="form-control" id="name" name="name" placeholder="Jhon Doe" required>

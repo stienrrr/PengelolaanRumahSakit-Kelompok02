@@ -18,7 +18,7 @@
                         <h6 class="mb-0 text-uppercase">Data Users Patient</h6>
                         <hr>
                         <div class="table-responsive">
-                            <table id="dataTable" class="table table-striped table-bordered">
+                            <table id="dataTable" class="table table-striped table-bordered" style="width: 100%;">
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
@@ -33,10 +33,17 @@
                                         <tr>
                                             <td class="text-center"></td>
                                             <td>{{ $data->name }}</td>
-                                            <td>{{ $data->username }}</td>
-                                            <td>{{ $data->email }}</td>
+                                            <td class="text-center">{{ $data->username }}</td>
+                                            <td class="text-center">{{ $data->email }}</td>
                                             <td>
-                                                Detail | Edit | Delete
+                                                <div class="row row-cols-auto g-2 align-items-center justify-content-center">
+                                                    <div class="col">
+                                                        <a href="#" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <a href="#" class="btn btn-sm btn-danger raised d-flex gap-2"><i class="material-icons-outlined">delete</i></a>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

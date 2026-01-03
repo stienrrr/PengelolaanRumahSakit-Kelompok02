@@ -18,6 +18,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/patient', [UserController::class, 'patientIndex'])->name('users.patient');
         Route::get('/patient/create', [UserController::class, 'patientCreate'])->name('users.patient.create');
+        Route::post('/patient/store', [UserController::class, 'patientStore'])->name('users.patient.store');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
