@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +13,14 @@ Route::post('/registration', [AuthController::class, 'registration'])->name('reg
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::prefix('doctors')->group(function () {
+        Route::get('/list', [DoctorController::class, 'doctorList'])->name('doctors.list');
+        Route::get('/list/{user}/edit', [DoctorController::class, 'doctorTitleEdit'])->name('doctors.list.edit');
+        Route::put('/list/{user}/update', [DoctorController::class, 'doctorTitleUpdate'])->name('doctors.list.update');
+
+        Route::get('/schedule', [DoctorController::class, 'doctorSchedule'])->name('doctors.schedule');
+    });
 
     Route::prefix('users')->group(function () {
         Route::get('/admin', [UserController::class, 'adminIndex'])->name('users.admin');

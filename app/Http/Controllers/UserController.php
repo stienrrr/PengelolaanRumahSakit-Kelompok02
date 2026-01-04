@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DoctorTitle;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -51,6 +52,12 @@ class UserController extends Controller
 
         $user->assignRole($request->role);
 
+        if ($request->role == 'dokter') {
+            DoctorTitle::create([
+                'user_id' => $user->id,
+            ]);
+        }
+
         Alert::success('Success', 'Add user admin has success.');
         return redirect()->route('users.admin');
     }
@@ -83,6 +90,12 @@ class UserController extends Controller
         ]);
 
         $user->syncRoles($request->role);
+
+        if ($request->role == 'dokter') {
+            DoctorTitle::create([
+                'user_id' => $user->id,
+            ]);
+        }
 
         Alert::success('Success', 'Update user admin has success.');
         return redirect()->route('users.admin');

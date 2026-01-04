@@ -49,12 +49,12 @@ class User extends Authenticatable
         ];
     }
 
-    public function doctorTitles()
+    public function doctorTitle()
     {
         return $this->hasOne(DoctorTitle::class);
     }
 
-    public function doctorSchedules()
+    public function doctorSchedule()
     {
         return $this->hasOne(DoctorSchedule::class);
     }
