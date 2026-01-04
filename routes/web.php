@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,8 @@ Route::post('/registration', [AuthController::class, 'registration'])->name('reg
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('medicines', MedicineController::class);
 
     Route::prefix('doctors')->group(function () {
         Route::get('/list', [DoctorController::class, 'doctorList'])->name('doctors.list');
