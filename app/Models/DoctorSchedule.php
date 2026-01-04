@@ -21,4 +21,9 @@ class DoctorSchedule extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function registrations()
+    {
+        return $this->hasOne(Registration::class);
+    }
 }
