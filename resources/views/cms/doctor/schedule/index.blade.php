@@ -6,7 +6,7 @@
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="h4">Schedule Doctor</div>
             <div class="ms-auto">
-                <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-2"></i> Add Schedule</a>
+                <a href="{{ route('doctors.schedule.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-2"></i> Add Schedule</a>
             </div>
         </div>
         <!--end breadcrumb-->
@@ -29,29 +29,29 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <!-- <tbody>
+                                <tbody>
                                     @foreach ($datas as $data)
                                         <tr>
                                             <td class="text-center"></td>
-                                            <td>{{ $data->name }}</td>
-                                            <td class="text-center">{{ $data->username }}</td>
-                                            <td class="text-center">{{ $data->email }}</td>
-                                            <td class="text-center">{{ $data->roles[0]->name }}</td>
+                                            <td>{{ $data->doctor->name }}</td>
+                                            <td class="text-center">{{ $data->day ?? 'N/A' }}</td>
+                                            <td class="text-center">{{ $data->start_time ?? 'N/A' }} - {{ $data->end_time ?? 'N/A' }}</td>
+                                            <td class="text-center">{{ $data->notes ?? 'N/A' }}</td>
                                             <td>
                                                 <div class="row row-cols-auto g-2 align-items-center justify-content-center">
                                                     <div class="col">
-                                                        <a href="{{ route('users.admin.edit', $data->id) }}" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
+                                                        <a href="{{ route('doctors.schedule.edit', $data->id) }}" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
                                                     </div>
                                                     <div class="col">
                                                         <button type="button" class="btn btn-sm btn-danger raised d-flex gap-2" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal-{{ $data->id }}"><i class="material-icons-outlined">delete</i></button>
-                                                    @include('cms.user.admin.partial.delete')
+                                                    @include('cms.doctor.schedule.partial.delete')
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                     @endforeach
-                                </tbody> -->
+                                </tbody>
                             </table>
                         </div>
                     </div>

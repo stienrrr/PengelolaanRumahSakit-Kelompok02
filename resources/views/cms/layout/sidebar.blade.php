@@ -21,7 +21,11 @@
                     <div class="menu-title">Dashboard</div>
                 </a>
             </li>
+
+            @hasrole('admin|petugas-pendaftaran')
             <li class="menu-label">Master</li>
+            @endhasrole
+            @hasrole('admin')
             <li class="{{ Route::is('doctors.list.*') || Route::is('doctors.schedule.*') ? 'mm-active' : '' }}">
                 <a class="has-arrow" href="javascript:;">
                     <div class="parent-icon"><i class="material-icons-outlined">medical_information</i>
@@ -29,7 +33,6 @@
                     <div class="menu-title">Doctors</div>
                 </a>
                 <ul>
-                    @hasrole('admin')
                     <li class="{{ Route::is('doctors.list.*') ? 'mm-active' : '' }}">
                         <a href="{{ route('doctors.list') }}">
                             <i class="material-icons-outlined">arrow_right</i>
@@ -43,18 +46,11 @@
                             Schedule
                         </a>
                     </li>
-                    @endhasrole
-                    {{-- <li><a class="has-arrow" href="javascript:;"><i
-                                class="material-icons-outlined">arrow_right</i>Basic</a>
-                        <ul>
-                            <li><a href="auth-basic-login.html" target="_blank"><i
-                                        class="material-icons-outlined">arrow_right</i>Login</a></li>
-                            <li><a href="auth-basic-register.html" target="_blank"><i
-                                        class="material-icons-outlined">arrow_right</i>Register</a></li>
-                        </ul>
-                    </li> --}}
                 </ul>
             </li>
+            @endhasrole
+
+            @hasrole('admin|petugas-pendaftaran')
             <li class="{{ Route::is('users.admin.*') || Route::is('users.patient.*') ? 'mm-active' : '' }}">
                 <a class="has-arrow" href="javascript:;">
                     <div class="parent-icon"><i class="material-icons-outlined">group</i>
@@ -71,14 +67,12 @@
                     </li>
                     @endhasrole
 
-                    @hasrole('admin|petugas-pendaftaran')
                     <li class="{{ Route::is('users.patient.*') ? 'mm-active' : '' }}">
                         <a href="{{ route('users.patient') }}">
                             <i class="material-icons-outlined">arrow_right</i>
                             Patient
                         </a>
                     </li>
-                    @endhasrole
                     {{-- <li><a class="has-arrow" href="javascript:;"><i
                                 class="material-icons-outlined">arrow_right</i>Basic</a>
                         <ul>
@@ -90,6 +84,7 @@
                     </li> --}}
                 </ul>
             </li>
+            @endhasrole
             <!-- <li>
                 <a href="user-profile.html">
                     <div class="parent-icon"><i class="material-icons-outlined">person</i>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DoctorSchedule;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -48,10 +49,87 @@ class DoctorController extends Controller
 
     public function doctorSchedule()
     {
-        $datas = User::whereHas('roles', function ($query) {
-            $query->where('name', ['dokter']);
-        })->with(['doctorSchedule'])->get();
+        $datas = DoctorSchedule::with(['doctor'])->get();
 
         return view('cms.doctor.schedule.index', compact('datas'));
+    }
+
+    public function doctorScheduleCreate()
+    {
+        $doctors = User::whereHas('roles', function ($query) {
+            $query->where('name', ['dokter']);
+        })->whereDoesntHave('doctorSchedule')->get();
+
+        return view('cms.doctor.schedule.partial.create', compact('doctors'));
+    }
+
+    public function doctorScheduleStore(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'notes' => 'nullable',
+        ]);
+
+        if ($validation->fails()) {
+            Alert::error('Fail', 'Add schedule doctor has failed. Check your input data.');
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+
+        DoctorSchedule::create([
+            'user_id' => $request->user_id,
+            'day' => $request->day,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'notes' => $request->notes
+        ]);
+
+        Alert::success('Success', 'Add schedule doctor has success.');
+        return redirect()->route('doctors.schedule');
+    }
+
+    public function doctorScheduleEdit(DoctorSchedule $schedule)
+    {
+        $doctors = User::whereHas('roles', function ($query) {
+            $query->where('name', ['dokter']);
+        })->get();
+
+        return view('cms.doctor.schedule.partial.edit', compact('schedule', 'doctors'));
+    }
+
+    public function doctorScheduleUpdate(Request $request, DoctorSchedule $schedule)
+    {
+        $validation = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'notes' => 'nullable',
+        ]);
+
+        if ($validation->fails()) {
+            Alert::error('Fail', 'Update schedule doctor has failed. Check your input data.');
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+
+        $schedule->update([
+            'user_id' => $request->user_id,
+            'day' => $request->day,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'notes' => $request->notes
+        ]);
+
+        Alert::success('Success', 'Update schedule doctor has success.');
+        return redirect()->route('doctors.schedule');
+    }
+
+    public function doctorScheduleDelete(DoctorSchedule $schedule)
+    {
+        $schedule->delete();
+        Alert::success('Success', 'Delete schedule doctor has success.');
+        return redirect()->route('doctors.schedule');
     }
 }

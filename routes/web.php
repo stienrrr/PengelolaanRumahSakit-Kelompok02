@@ -20,6 +20,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/list/{user}/update', [DoctorController::class, 'doctorTitleUpdate'])->name('doctors.list.update');
 
         Route::get('/schedule', [DoctorController::class, 'doctorSchedule'])->name('doctors.schedule');
+        Route::get('/schedule/create', [DoctorController::class, 'doctorScheduleCreate'])->name('doctors.schedule.create');
+        Route::post('/schedule/store', [DoctorController::class, 'doctorScheduleStore'])->name('doctors.schedule.store');
+        Route::get('/schedule/{schedule}/edit', [DoctorController::class, 'doctorScheduleEdit'])->name('doctors.schedule.edit');
+        Route::put('/schedule/{schedule}/update', [DoctorController::class, 'doctorScheduleUpdate'])->name('doctors.schedule.update');
+        Route::delete('/schedule/{schedule}/destroy', [DoctorController::class, 'doctorScheduleDelete'])->name('doctors.schedule.destroy');
     });
 
     Route::prefix('users')->group(function () {
