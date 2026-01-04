@@ -22,6 +22,17 @@
                 </a>
             </li>
 
+            @hasrole('admin|petugas-pendaftaran|pasien')
+            <li class="menu-label">Service</li>
+            <li class="{{ Route::is('registrations.*') ? 'mm-active' : '' }}">
+                <a href="{{ route('registrations.index') }}">
+                    <div class="parent-icon"><i class="material-icons-outlined">app_registration</i>
+                    </div>
+                    <div class="menu-title">Registration</div>
+                </a>
+            </li>
+            @endhasrole
+
             @hasrole('admin|petugas-pendaftaran')
             <li class="menu-label">Master</li>
             @endhasrole
