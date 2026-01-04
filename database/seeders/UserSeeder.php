@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DoctorTitle;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -37,15 +38,11 @@ class UserSeeder extends Seeder
             $role = Role::findByName($data['role'], 'web');
             $user->assignRole($role);
 
-            // if ($data['role'] == 'user') {
-            //     UserDetail::create([
-            //         'user_id' => $user->id,
-            //     ]);
-            // } else {
-            //     AdminDetail::create([
-            //         'admin_id' => $user->id,
-            //     ]);
-            // }
+            if ($data['role'] == 'dokter') {
+                DoctorTitle::create([
+                    'user_id' => $user->id,
+                ]);
+            }
         }
     }
 }

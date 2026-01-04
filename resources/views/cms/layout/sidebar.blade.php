@@ -21,7 +21,7 @@
                     <div class="menu-title">Dashboard</div>
                 </a>
             </li>
-            <li class="menu-label">Pages</li>
+            <li class="menu-label">Master</li>
             <li class="{{ Route::is('users.admin') || Route::is('users.patient') ? 'mm-active' : '' }}">
                 <a class="has-arrow" href="javascript:;">
                     <div class="parent-icon"><i class="material-icons-outlined">group</i>
@@ -29,18 +29,23 @@
                     <div class="menu-title">Users</div>
                 </a>
                 <ul>
+                    @hasrole('admin')
                     <li class="{{ Route::is('users.admin') ? 'mm-active' : '' }}">
                         <a href="{{ route('users.admin') }}">
                             <i class="material-icons-outlined">arrow_right</i>
                             Admin
                         </a>
                     </li>
+                    @endhasrole
+
+                    @hasrole('admin|petugas-pendaftaran')
                     <li class="{{ Route::is('users.patient') ? 'mm-active' : '' }}">
                         <a href="{{ route('users.patient') }}">
                             <i class="material-icons-outlined">arrow_right</i>
                             Patient
                         </a>
                     </li>
+                    @endhasrole
                     {{-- <li><a class="has-arrow" href="javascript:;"><i
                                 class="material-icons-outlined">arrow_right</i>Basic</a>
                         <ul>
