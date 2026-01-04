@@ -45,6 +45,16 @@
             </li>
             @endhasrole
 
+            @hasrole('admin|apoteker|dokter')
+            <li class="{{ Route::is('prescriptions.*') ? 'mm-active' : '' }}">
+                <a href="{{ route('prescriptions.index') }}">
+                    <div class="parent-icon"><i class="material-icons-outlined">medication</i>
+                    </div>
+                    <div class="menu-title">Prescription</div>
+                </a>
+            </li>
+            @endhasrole
+
             @hasrole('admin|petugas-pendaftaran')
             <li class="menu-label">Master</li>
             @endhasrole

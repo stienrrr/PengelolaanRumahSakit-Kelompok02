@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,14 @@ Route::post('/registration', [AuthController::class, 'registration'])->name('reg
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('prescriptions', PrescriptionController::class);
+    Route::put('/prescriptions/{prescription}/status', [PrescriptionController::class, 'status'])->name('prescriptions.status');
+    Route::get('/presciptions/{prescription}/create-item', [PrescriptionController::class, 'prescriptionItemCreate'])->name('prescriptions.create-item');
+    Route::post('/presciptions/{prescription}/store-item', [PrescriptionController::class, 'prescriptionItemStore'])->name('prescriptions.store-item');
+    Route::get('/presciptions/{prescription}/edit-item/{id}', [PrescriptionController::class, 'prescriptionItemEdit'])->name('prescriptions.edit-item');
+    Route::put('/presciptions/{prescription}/update-item/{id}', [PrescriptionController::class, 'prescriptionItemUpdate'])->name('prescriptions.update-item');
+    Route::delete('/presciptions/{prescription}/destroy-item/{id}', [PrescriptionController::class, 'prescriptionItemDestroy'])->name('prescriptions.destroy-item');
 
     Route::resource('medicalrecords', MedicalRecordController::class);
 

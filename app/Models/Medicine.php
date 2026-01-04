@@ -19,4 +19,9 @@ class Medicine extends Model
         'description',
         'expiry_date',
     ];
+
+    public function prescriptionsItems()
+    {
+        return $this->hasMany(PrescriptionsItems::class);
+    }
 }

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +12,9 @@ return new class extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('medical_record_id')->constrained('medical_records')->onDelete('cascade');
+            $table->date('date');
+            $table->enum('status', ['pending', 'processed', 'completed'])->default('pending');
             $table->timestamps();
         });
     }
