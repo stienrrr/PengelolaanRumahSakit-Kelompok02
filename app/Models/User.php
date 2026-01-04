@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Registration::class);
     }
+
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class);
+    }
 }

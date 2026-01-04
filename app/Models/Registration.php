@@ -28,4 +28,9 @@ class Registration extends Model
     {
         return $this->belongsTo(DoctorSchedule::class, 'doctor_schedule_id');
     }
+
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class);
+    }
 }

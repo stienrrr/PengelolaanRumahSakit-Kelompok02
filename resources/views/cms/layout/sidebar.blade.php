@@ -22,13 +22,25 @@
                 </a>
             </li>
 
-            @hasrole('admin|petugas-pendaftaran|pasien')
+            @hasrole('admin|petugas-pendaftaran|pasien|dokter')
             <li class="menu-label">Service</li>
+            @endhasrole
+            @hasrole('admin|petugas-pendaftaran|pasien')
             <li class="{{ Route::is('registrations.*') ? 'mm-active' : '' }}">
                 <a href="{{ route('registrations.index') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">app_registration</i>
                     </div>
                     <div class="menu-title">Registration</div>
+                </a>
+            </li>
+            @endhasrole
+
+            @hasrole('admin|dokter')
+            <li class="{{ Route::is('medicalrecords.*') ? 'mm-active' : '' }}">
+                <a href="{{ route('medicalrecords.index') }}">
+                    <div class="parent-icon"><i class="material-icons-outlined">note_add</i>
+                    </div>
+                    <div class="menu-title">Medical Record</div>
                 </a>
             </li>
             @endhasrole

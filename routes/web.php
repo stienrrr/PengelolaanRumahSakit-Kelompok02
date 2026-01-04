@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
@@ -15,6 +16,8 @@ Route::post('/registration', [AuthController::class, 'registration'])->name('reg
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('medicalrecords', MedicalRecordController::class);
 
     Route::resource('registrations', RegistrationController::class);
     Route::put('/registrations/{registration}/status', [RegistrationController::class, 'status'])->name('registrations.status');
