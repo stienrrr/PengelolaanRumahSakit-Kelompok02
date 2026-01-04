@@ -36,7 +36,7 @@
             @hasrole('admin|petugas-pendaftaran')
             <li class="menu-label">Master</li>
             @endhasrole
-            @hasrole('admin')
+            @hasrole('admin|apoteker')
             <li class="{{ Route::is('medicines.*') ? 'mm-active' : '' }}">
                 <a href="{{ route('medicines.index') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">medication</i>
@@ -44,7 +44,9 @@
                     <div class="menu-title">Medicine</div>
                 </a>
             </li>
+            @endhasrole
 
+            @hasrole('admin')
             <li class="{{ Route::is('doctors.list.*') || Route::is('doctors.schedule.*') ? 'mm-active' : '' }}">
                 <a class="has-arrow" href="javascript:;">
                     <div class="parent-icon"><i class="material-icons-outlined">medical_information</i>

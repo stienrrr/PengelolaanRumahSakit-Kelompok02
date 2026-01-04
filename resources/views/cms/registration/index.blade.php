@@ -30,6 +30,7 @@
                                         @endhasrole
                                         <th>Doctor</th>
                                         <th>Date</th>
+                                        <th>Queue Number</th>
                                         <th>Status</th>
                                         <th>Complaint Initial</th>
                                         <th>Action</th>
@@ -45,6 +46,7 @@
                                             @endhasrole
                                             <td class="text-center">{{ $data->doctorSchedule->doctor->name }}</td>
                                             <td class="text-center">{{ Carbon\Carbon::parse($data->registration_date)->format('d F Y') }}</td>
+                                            <td class="text-center">{{ $data->queue_number }}</td>
                                             <td class="text-center">
                                                 <span
                                                     class="badge bg-grd-{{ match ($data->status) {
@@ -66,9 +68,11 @@
                                             <td class="text-center">{{ $data->complaint_initial }}</td>
                                             <td>
                                                 <div class="row row-cols-auto g-2 align-items-center justify-content-center">
-                                                    <div class="col">
-                                                        <a href="{{ route('registrations.edit', $data->id) }}" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
-                                                    </div>
+                                                    @if ($data->status == 'pending')
+                                                        <div class="col">
+                                                            <a href="{{ route('registrations.edit', $data->id) }}" class="btn btn-sm btn-warning raised d-flex gap-2"><i class="material-icons-outlined">edit</i></a>
+                                                        </div>
+                                                    @endif
                                                     
                                                     @hasrole('admin|petugas-pendaftaran')
                                                         <div class="col">
