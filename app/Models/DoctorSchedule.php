@@ -24,6 +24,6 @@ class DoctorSchedule extends Model
 
     public function registrations()
     {
-        return $this->hasOne(Registration::class);
+        return $this->hasMany(Registration::class);
     }
 }

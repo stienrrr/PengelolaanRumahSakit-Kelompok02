@@ -6,6 +6,7 @@ use App\Models\MedicalRecord;
 use App\Models\Registration;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,7 +17,13 @@ class MedicalRecordController extends Controller
      */
     public function index()
     {
-        $datas = MedicalRecord::with(['patient', 'doctor', 'registration'])->get();
+        $user = Auth::user();
+
+        if ($user->hasRole('pasien')) {
+            $datas = MedicalRecord::with(['patient', 'doctor', 'registration'])->where('patient_id', $user->id)->get();
+        } else {
+            $datas = MedicalRecord::with(['patient', 'doctor', 'registration'])->get();
+        }
 
         return view('cms.medical_record.index', compact('datas'));
     }

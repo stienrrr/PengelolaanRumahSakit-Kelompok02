@@ -35,7 +35,7 @@
             </li>
             @endhasrole
 
-            @hasrole('admin|dokter')
+            @hasrole('admin|dokter|pasien')
             <li class="{{ Route::is('medicalrecords.*') ? 'mm-active' : '' }}">
                 <a href="{{ route('medicalrecords.index') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">note_add</i>
@@ -45,7 +45,7 @@
             </li>
             @endhasrole
 
-            @hasrole('admin|apoteker|dokter')
+            @hasrole('admin|apoteker')
             <li class="{{ Route::is('prescriptions.*') ? 'mm-active' : '' }}">
                 <a href="{{ route('prescriptions.index') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">medication</i>
@@ -68,7 +68,7 @@
             </li>
             @endhasrole
 
-            @hasrole('admin')
+            @hasrole('admin|pasien')
             <li class="{{ Route::is('doctors.list.*') || Route::is('doctors.schedule.*') ? 'mm-active' : '' }}">
                 <a class="has-arrow" href="javascript:;">
                     <div class="parent-icon"><i class="material-icons-outlined">medical_information</i>
@@ -76,12 +76,14 @@
                     <div class="menu-title">Doctors</div>
                 </a>
                 <ul>
+                    @hasrole('admin')
                     <li class="{{ Route::is('doctors.list.*') ? 'mm-active' : '' }}">
                         <a href="{{ route('doctors.list') }}">
                             <i class="material-icons-outlined">arrow_right</i>
                             List
                         </a>
                     </li>
+                    @endhasrole
                     
                     <li class="{{ Route::is('doctors.schedule.*') ? 'mm-active' : '' }}">
                         <a href="{{ route('doctors.schedule') }}">

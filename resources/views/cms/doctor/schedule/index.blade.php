@@ -5,9 +5,11 @@
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="h4">Schedule Doctor</div>
+            @hasrole('admin')
             <div class="ms-auto">
                 <a href="{{ route('doctors.schedule.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-2"></i> Add Schedule</a>
             </div>
+            @endhasrole
         </div>
         <!--end breadcrumb-->
 
@@ -26,7 +28,9 @@
                                         <th>Day</th>
                                         <th>Time</th>
                                         <th>Notes</th>
+                                        @hasrole('admin')
                                         <th>Action</th>
+                                        @endhasrole
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,6 +41,7 @@
                                             <td class="text-center">{{ $data->day ?? 'N/A' }}</td>
                                             <td class="text-center">{{ $data->start_time ?? 'N/A' }} - {{ $data->end_time ?? 'N/A' }}</td>
                                             <td class="text-center">{{ $data->notes ?? 'N/A' }}</td>
+                                            @hasrole('admin')
                                             <td>
                                                 <div class="row row-cols-auto g-2 align-items-center justify-content-center">
                                                     <div class="col">
@@ -49,6 +54,7 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            @endhasrole
                                         </tr>
                                     @endforeach
                                 </tbody>
